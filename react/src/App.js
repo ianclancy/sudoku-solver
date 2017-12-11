@@ -8,6 +8,7 @@ class App extends Component {
       puzzle: []
     };
     this.handleNewPuzzleClick = this.handleNewPuzzleClick.bind(this);
+    this.handleSolvePuzzleClick = this.handleSolvePuzzleClick.bind(this);
   }
 
   handleNewPuzzleClick(event) {
@@ -17,15 +18,25 @@ class App extends Component {
     this.setState({ puzzle: puzzle });
   }
 
+  handleSolvePuzzleClick(event) {
+    event.preventDefault();
+    let sudoku = require('sudoku');
+    let solution = sudoku.solvepuzzle(this.state.puzzle);
+    this.setState({ puzzle: solution });
+  }
+
   render() {
     return(
       <div>
         <Grid
           puzzle={this.state.puzzle}
         />
-        <div className="buttons">
+        <div className="buttons-container">
           <button type="button" onClick={this.handleNewPuzzleClick}>
             New Puzzle
+          </button>
+          <button type="button" onClick={this.handleSolvePuzzleClick}>
+            Solve Puzzle
           </button>
         </div>
       </div>
