@@ -16,6 +16,14 @@ class App extends Component {
     let sudoku = require('sudoku');
     let puzzle = sudoku.makepuzzle();
     this.setState({ puzzle: puzzle });
+    fetch("/api/v1/puzzles", {
+      method: "POST",
+      body: JSON.stringify(puzzle),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "same-origin"
+    })
   }
 
   handleSolvePuzzleClick(event) {
