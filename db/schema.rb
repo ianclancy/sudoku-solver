@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171217175801) do
+ActiveRecord::Schema.define(version: 20171217182821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,15 @@ ActiveRecord::Schema.define(version: 20171217175801) do
   create_table "puzzles", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "squares", force: :cascade do |t|
+    t.integer  "puzzle_id"
+    t.integer  "index_in_puzzle"
+    t.integer  "value"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["puzzle_id"], name: "index_squares_on_puzzle_id", using: :btree
   end
 
 end
